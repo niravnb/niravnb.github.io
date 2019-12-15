@@ -67,9 +67,9 @@ async function app() {
   console.log('Loading mobilenet..');
 
   // Load the model.
-  const model = await tf.loadLayersModel('model/model.json');
+//   const model = await tf.loadLayersModel('model/model.json');
 
-  // net = await mobilenet.load();
+  net = await mobilenet.load();
   console.log('Successfully loaded model');
   
   // Create an object from Tensorflow.js data API which could capture image 
@@ -77,10 +77,10 @@ async function app() {
   const webcam = await tf.data.webcam(webcamElement);
   while (true) {
     const img = await webcam.capture();
-    // const example = tf.fromPixels(webcamElement);  // for example
-    const result = model.predict([img,[0]]);
-    console.log(result);
-    // const result = await net.classify(img);
+    const example = tf.fromPixels(webcamElement);  // for example
+//     const result = model.predict([img,[0]]);
+//     console.log(result);
+    const result = await net.classify(img);
 
     document.getElementById('console').innerText = `
       prediction: ${result[0].className}\n
