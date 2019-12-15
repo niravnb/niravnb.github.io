@@ -78,7 +78,7 @@ async function app() {
   while (true) {
     const img = await webcam.capture();
     // const example = tf.fromPixels(webcamElement);  // for example
-    const result = model.predict(img);
+    const result = model.predict([img,[0]]);
     console.log(result);
     // const result = await net.classify(img);
 
